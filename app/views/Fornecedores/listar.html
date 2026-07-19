@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:'Lista de fornecedores' /}
+
+<header>
+    <div class="topo">
+        <div class="logo">
+            <h1>Lista de fornecedores</h1>
+        </div>
+
+        <form class="pesquisa" action="@{Fornecedores.listar(texto)}">
+            <input type="text" name="texto" placeholder="Pesquisar..." value="${texto}">
+            <input type="submit" value="🔍">
+        </form>
+    </div>
+    <nav>
+        <a href="@{Produtos.form()}">Cadastrar novo produto</a>
+        <a href="@{Fornecedores.form()}">Cadastrar novo fornecedor</a>
+        <a class="atual" href="#">Lista de fornecedores</a>
+        <a href="@{Produtos.listar()}">Lista de produtos</a>
+    </nav>
+</header>
+<br>
+<div class="corpo">
+<table>
+<tr>
+<th>Nome</th>
+<th>CNPJ</th>
+<th>Remover</th>
+<th>Editar</th>
+</tr>
+#{list items:lista, as: 'f'}
+<tr>
+<td><a href=@{Fornecedores.detalhar(f.id, request.url)}>${f.nome}</a></td>
+<td>${f.cnpj}</td>
+<td><a href=@{Fornecedores.remover(f.id)}>🗑️</a></td>
+<td><a href=@{Fornecedores.editar(f.id)}>✏️</a></td>
+</tr>
+#{/list}
+#{else}
+<td colspan="5">Nenhum fornecedor cadastrado.</td>
+#{/else}
+</table>
+</div>

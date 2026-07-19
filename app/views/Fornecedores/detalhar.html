@@ -1,0 +1,42 @@
+#{extends 'main.html' /}
+#{set title:'Detalhamento de Fornecedor' /}
+
+<header>
+<div class="topo">
+<h1>Detalhes do fornecedor</h1>
+</header>
+</div>
+<div class="corpo">
+<p>Nome: ${f.nome}</p>
+<p>CNPJ: ${f.cnpj}</p>
+
+<H2>Lista de produtos deste fornecedor</H2>
+<table>
+<tr>
+<th>Nome</th>
+<th>Descrição</th>
+<th>Preço</th>
+<th>Quantidade</th>
+<th>Categoria</th>
+<th>Remover</th>
+<th>Editar</th>
+</tr>
+#{list items:produtos, as: 'p'}
+<tr>
+<td><a href="@{Produtos.detalhar(p.id, request.url)}">${p.nome}</a></td>
+<td>${p.descricao}</td>
+<td>${p.preco}</td>
+<td>${p.quantidade}</td>
+<td>${p.categoria}</td>
+<td><a href=@{Produtos.remover(p.id)}>🗑️</a></td>
+<td><a href=@{Produtos.editar(p.id)}>✏️</a></td>
+</tr>
+#{/list}
+#{else}
+<td colspan="7">Nenhum produto cadastrado.</td>
+#{/else}
+</table>
+<div class="btn-voltar">
+<a href="${url}">← Voltar</a>
+</div>
+</div>
