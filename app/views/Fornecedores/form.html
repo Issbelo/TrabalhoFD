@@ -1,0 +1,99 @@
+#{extends 'main.html' /}
+
+<header>
+    <div class="topo">
+        <div class="logo">
+            #{if f?.id}
+                #{set title:'Editar fornecedor' /}
+                <h1>Editar fornecedor</h1>
+            #{/if}
+            #{else}
+                #{set title:'Cadastro de fornecedor' /}
+                <h1>Cadastrar fornecedor</h1>
+            #{/else}
+        </div>
+    </div>
+
+    <nav>
+        <a href="@{Produtos.form()}">Cadastrar novo produto</a>
+        <a class="atual" href="#">Cadastrar novo fornecedor</a>
+        <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
+        <a href="@{Produtos.listar()}">Lista de produtos</a>
+    </nav>
+</header>
+
+<div class="corpo">
+    <form action="@{Fornecedores.salvar()}">
+        <input type="hidden" name="f.id" value="${f.id}">
+
+        <label for="nome">Nome:</label>
+        <input
+            type="text"
+            id="nome"
+            name="f.nome"
+            value="${f.nome}"
+            required
+        >
+
+        <label for="cnpj">CNPJ:</label>
+        <input
+            type="text"
+            id="cnpj"
+            name="f.cnpj"
+            value="${f.cnpj}"
+            placeholder="00.000.000/0000-00"
+            maxlength="18"
+            inputmode="numeric"
+            autocomplete="off"
+            required
+        >
+
+        <input type="submit" value="Salvar">
+    </form>
+</div>
+
+<script>
+(function () {
+    var campoCnpj = document.getElementById("cnpj");
+
+    function formatarCnpj(valor) {
+        var numeros = valor.replace(/\D/g, "").substring(0, 14);
+
+        if (numeros.length > 12) {
+            return numeros.replace(
+                /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2}).*/,
+                "$1.$2.$3/$4-$5"
+            );
+        }
+
+        if (numeros.length > 8) {
+            return numeros.replace(
+                /^(\d{2})(\d{3})(\d{3})(\d{0,4}).*/,
+                "$1.$2.$3/$4"
+            );
+        }
+
+        if (numeros.length > 5) {
+            return numeros.replace(
+                /^(\d{2})(\d{3})(\d{0,3}).*/,
+                "$1.$2.$3"
+            );
+        }
+
+        if (numeros.length > 2) {
+            return numeros.replace(
+                /^(\d{2})(\d{0,3}).*/,
+                "$1.$2"
+            );
+        }
+
+        return numeros;
+    }
+
+    campoCnpj.addEventListener("input", function () {
+        campoCnpj.value = formatarCnpj(campoCnpj.value);
+    });
+
+    campoCnpj.value = formatarCnpj(campoCnpj.value);
+})();
+</script>

@@ -1,0 +1,179 @@
+#{extends 'main.html' /}
+#{set title:'Detalhamento de Fornecedor' /}
+
+#{set 'moreStyles'}
+<style>
+    .supplier-detail-heading {
+        min-height: 120px;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        background: var(--cor-area-titulo);
+    }
+
+    .supplier-detail-heading h1 {
+        width: 100%;
+        margin: 0;
+        color: var(--cor-lilas);
+        font-size: 30px;
+        text-align: left;
+    }
+
+    .supplier-detail-page {
+        padding-top: 28px;
+    }
+
+    .supplier-info-card {
+        max-width: 900px;
+        margin: 0 auto 32px;
+        overflow: hidden;
+        background: var(--cor-painel);
+        border: 1px solid var(--cor-borda);
+        border-radius: 14px;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.22);
+    }
+
+    .supplier-info-card__heading {
+        padding: 14px 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: var(--cor-cabecalho);
+        border-bottom: 1px solid var(--cor-borda);
+        color: var(--cor-lilas);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .supplier-info-card__badge {
+        padding: 6px 10px;
+        border-radius: 20px;
+        background: var(--cor-cabecalho-tabela);
+        color: var(--cor-lilas-claro);
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+
+    .supplier-info-card__content {
+        padding: 22px;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 16px;
+    }
+
+    .supplier-info-field {
+        min-width: 0;
+        padding: 16px;
+        background: var(--cor-painel);
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
+    }
+
+    .supplier-info-field__label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--cor-texto-secundario);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .supplier-info-field__value {
+        display: block;
+        overflow-wrap: anywhere;
+        color: var(--cor-texto);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .supplier-products-title {
+        margin-top: 28px;
+    }
+
+    @media (max-width: 600px) {
+        .supplier-detail-heading {
+            min-height: 100px;
+            padding: 22px 18px;
+        }
+
+        .supplier-detail-heading h1 {
+            font-size: 24px;
+        }
+
+        .supplier-info-card__content {
+            grid-template-columns: 1fr;
+            padding: 16px;
+        }
+
+        .supplier-info-card__heading {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>
+#{/set}
+
+<header class="supplier-detail-heading">
+    <h1>Detalhes do fornecedor</h1>
+</header>
+
+<main class="corpo supplier-detail-page">
+    <section class="supplier-info-card" aria-label="Dados do fornecedor">
+        <div class="supplier-info-card__heading">
+            <span>Dados cadastrais</span>
+            <span class="supplier-info-card__badge">Fornecedor</span>
+        </div>
+
+        <div class="supplier-info-card__content">
+            <div class="supplier-info-field">
+                <span class="supplier-info-field__label">Nome do fornecedor</span>
+                <strong class="supplier-info-field__value">${f.nome}</strong>
+            </div>
+
+            <div class="supplier-info-field">
+                <span class="supplier-info-field__label">CNPJ</span>
+                <strong class="supplier-info-field__value">${f.cnpj}</strong>
+            </div>
+        </div>
+    </section>
+
+    <h2 class="supplier-products-title">Lista de produtos deste fornecedor</h2>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Categoria</th>
+            <th>Remover</th>
+            <th>Editar</th>
+        </tr>
+
+        #{list items:produtos, as:'p'}
+        <tr>
+            <td><a href="@{Produtos.detalhar(p.id, request.url)}">${p.nome}</a></td>
+            <td>${p.descricao}</td>
+            <td>${p.preco}</td>
+            <td>${p.quantidade}</td>
+            <td>${p.categoria}</td>
+            <td><a href="@{Produtos.remover(p.id)}">🗑️</a></td>
+            <td><a href="@{Produtos.editar(p.id)}">✏️</a></td>
+        </tr>
+        #{/list}
+
+        #{else}
+        <tr>
+            <td colspan="7">Nenhum produto cadastrado.</td>
+        </tr>
+        #{/else}
+    </table>
+
+    <div class="btn-voltar">
+        <a href="${url}">← Voltar</a>
+    </div>
+</main>
