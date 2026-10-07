@@ -1,0 +1,8 @@
+#{extends 'main.html' /}
+#{set title:'Página Inicial' /}
+
+<h2> Bem-vindo!</h2>
+
+<p>Você está logado como: <strong>${session.user}</strong></p>
+
+<a href="@{Logins.form()}">Sair</a>

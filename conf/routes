@@ -1,0 +1,17 @@
+# Rota inicial redirecionando para a exibição da tela de login
+GET     /                                       Logins.form
+GET     /login                                  Logins.form
+POST    /login                                  Logins.logar
+GET     /logout                                 Logins.logout
+
+# Páginas protegidas pelo interceptador
+GET     /app                                    Application.index
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

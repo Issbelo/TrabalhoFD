@@ -1,0 +1,31 @@
+#{extends 'main.html' /}
+<header>
+ <div class="topo">
+        <div class="logo">
+#{if f?.id}
+#{set title:'Editar fornecedor' /}
+<h1>Editar fornecedor</h1>
+#{/if}
+#{else}
+#{set title:'Cadastro de fornecedor' /}
+<h1>Cadastrar fornecedor</h1>
+#{/else}
+    </div>
+</div>
+    <nav>
+        <a href="@{Produtos.form()}">Cadastrar novo produto</a>
+        <a class="atual" href="#">Cadastrar novo fornecedor</a>
+        <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
+        <a href="@{Produtos.listar()}">Lista de produtos</a>
+    </nav>
+</header>
+<div class="corpo">
+<form action=@{Fornecedores.salvar()}>
+<input type="hidden" name="f.id" value="${f.id}">
+<label>Nome: </label>
+<input type="text" name="f.nome" value="${f.nome}" required> <br>
+<label>CNPJ: </label>
+<input type="text" name="f.cnpj" value="${f.cnpj}" required> <br>
+<input type="submit" value="Salvar">
+</form>
+</div>

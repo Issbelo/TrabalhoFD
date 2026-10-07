@@ -1,0 +1,293 @@
+/* Fundo da página */
+body{
+	margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Centraliza o conteúdo */
+.container{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+}
+
+/* Títulos */
+h1,h2,h3{
+    text-align:center;
+    color:#6f3fa5;
+    margin-bottom:25px;
+}
+
+/* Links */
+a{
+    color:#6f3fa5;
+    text-decoration:none;
+    transition:.3s;
+}
+
+a:hover{
+    color:#4d2673;
+    text-decoration:underline;
+}
+
+/* Formulários */
+form:not(.pesquisa){
+    background:#ffffff;
+    max-width:700px;
+    margin:25px auto;
+    padding:25px;
+    border-radius:12px;
+    border:1px solid #ececec;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Texto dos campos */
+label{
+    display:block;
+    margin-bottom:6px;
+    margin-top:12px;
+    font-weight:bold;
+    color:#555555;
+}
+
+/* Campos */
+input,
+select,
+textarea{
+    width:100%;
+    padding:10px;
+    margin-bottom:15px;
+    border:1px solid #ececec;
+    border-radius:8px;
+    font-size:15px;
+    box-sizing:border-box;
+    transition:.3s;
+}
+
+/* Campo selecionado */
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:#d9b3ff;
+    box-shadow:0 0 8px rgba(217,179,255,.4);
+}
+
+/* Botões */
+button,
+input[type=submit],
+input[type=button]{
+    background:#d9b3ff;
+    color:#4d2673;
+    border:none;
+    border-radius:8px;
+    padding:10px 20px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+/* Efeito do botão */
+button:hover,
+input[type=submit]:hover,
+input[type=button]:hover{
+    background:#c792ff;
+    transform:translateY(-2px);
+}
+
+/* Tabela */
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+    background:#ffffff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Cabeçalho da tabela */
+th{
+    background:#d9b3ff;
+    color:#4d2673;
+    padding:14px;
+    font-size:15px;
+}
+
+/* Células */
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ececec;
+}
+
+/* Cor alternada das linhas */
+tr:nth-child(even){
+    background:#faf7ff;
+}
+
+/* Destaca a linha */
+tr:hover{
+    background:#f2e6ff;
+}
+
+/* Cartões */
+.card{
+    background:#ffffff;
+    border:1px solid #ececec;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Mensagem de sucesso */
+.success{
+    background:#f8f1ff;
+    color:#6f3fa5;
+    border-left:5px solid #d9b3ff;
+    padding:12px;
+    margin:15px 0;
+    border-radius:8px;
+}
+
+/* Mensagem de erro */
+.error{
+    background:#fff3f3;
+    color:#c0392b;
+    border-left:5px solid #ff8f8f;
+    padding:12px;
+    margin:15px 0;
+    border-radius:8px;
+}
+
+/* Campo de pesquisa */
+.search{
+    width:300px;
+    margin-bottom:20px;
+}
+
+/* Espaço entre botões */
+button+button,
+input[type=button]+input[type=button],
+input[type=submit]+input[type=submit]{
+    margin-left:10px;
+}
+
+/* Responsividade */
+@media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    table{
+        font-size:14px;
+    }
+
+    input,
+    select,
+    textarea,
+    button,
+    input[type=submit],
+    input[type=button]{
+        width:100%;
+    }
+
+    button+button,
+    input[type=button]+input[type=button],
+    input[type=submit]+input[type=submit]{
+        margin-left:0;
+        margin-top:10px;
+    }
+}
+header {
+    height: 140px;
+    background:#d9b3ff;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+.topo {
+	margin-top: 10px;
+    height:50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav {
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.pesquisa {
+    display: flex;
+    margin-left: auto; 
+    gap: 5px;
+}
+
+.pesquisa input[type="text"] {
+    width: 250px;
+    padding: 8px;
+}
+
+.pesquisa input[type="submit"] {
+	background-color: #c792ff;
+    padding: 2px 3px;
+}
+
+nav a {
+    color: #4d2673;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+nav a:hover {
+	color: #ececec;
+    background: #6f3fa5;
+}
+
+.atual {
+  color: white;
+  background-color: #c792ff;
+}
+
+.corpo {
+	margin:0;
+    padding:25px;
+    background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#444444;
+}
+
+.btn-voltar {
+	margin-top:10px;
+    display: inline-block;
+    background: #d9b3ff;
+    color: #4d2673;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: .3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+.btn-voltar:hover {
+    background: #c792ff;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(111,63,165,.3);
+}
