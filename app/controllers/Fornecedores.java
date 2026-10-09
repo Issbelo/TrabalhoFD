@@ -5,10 +5,14 @@ import java.util.List;
 import models.Fornecedor;
 import models.Produto;
 import models.Status;
+import play.data.validation.Valid;
+import play.data.validation.Validation;
+import play.db.jpa.JPABase;
 import play.mvc.Controller;
 import play.mvc.With;
-import play.mvc.results.Result;
+import security.Seguranca;
 
+@With(Seguranca.class)
 public class Fornecedores extends Controller{
 
 	public static void listar(String texto) {
@@ -22,8 +26,18 @@ public class Fornecedores extends Controller{
 			render(lista, texto);
 		}
 	}
+	
+	public static void verFoto(Long id) {
+		Fornecedor f = Fornecedor.findById(id);
+		response.setContentTypeIfNotSet(f.foto.type());
+		renderBinary(f.foto.get());
+	}
 
 	public static void salvar(Fornecedor f) {
+		// if (validation.hasErrors()) {
+		//	Fornecedor erro = f;
+		//	renderTemplate("Fornecedores/form.html", erro);
+		//}
 		f.save();
 		listar(null);
 	}
@@ -32,7 +46,7 @@ public class Fornecedores extends Controller{
 		Fornecedor f = new Fornecedor();
 		render(f);
 	}
-
+	
 	public static void remover(Long id) {
 		Fornecedor fornecedor = Fornecedor.findById(id);
 		fornecedor.status = Status.INDISPONIVEL;

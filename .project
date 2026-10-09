@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>prova01</name>
+	<name>TrabalhoB3</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,8 +15,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.playframework.playclipse.playNature</nature>
 	</natures>
-	<linkedResources><link><name>docviewer</name><type>2</type><location>C:/UsersIFJC/20231064010019/Downloads/play-1.5.3-withJava1.8/play-1.5.3/modules/docviewer/app</location></link>
-<link><name>docviewer</name><type>2</type><location>C:/Users/clara/Downloads/play-1.5.3/modules/docviewer/app</location></link>
-<link><name>public/docviewer</name><type>2</type><location>C:/Users/clara/Downloads/play-1.5.3/modules/docviewer/public</location></link>
-</linkedResources>
+	<linkedResources>
+		<link>
+			<name>docviewer</name>
+			<type>2</type>
+			<location>C:/UsersIFJC/20231064010019/Downloads/play-1.5.3-withJava1.8/play-1.5.3/modules/docviewer/app</location>
+		</link>
+		<link>
+			<name>public/docviewer</name>
+			<type>2</type>
+			<location>C:/Users/julia/Downloads/play-1.5.3/modules/docviewer/public</location>
+		</link>
+	</linkedResources>
 </projectDescription>

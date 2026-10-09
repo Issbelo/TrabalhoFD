@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
+import play.db.jpa.Blob;
 import play.db.jpa.Model;
 
 @Entity
@@ -25,7 +26,9 @@ public class Produto extends Model{
 
 	@ManyToOne
 	public Fornecedor fornecedor;
-
+	
+	public Blob foto;
+	
 	public Produto() {
 		status = Status.DISPONIVEL;
 	}

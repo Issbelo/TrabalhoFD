@@ -20,7 +20,7 @@
     </nav>
 </header>
 <div class="corpo">
-<form action=@{Produtos.salvar()}>
+<form action=@{Produtos.salvar()} method="POST" enctype="multipart/form-data">
 <input type="hidden" name="p.id" value="${p.id}">
 <label>Nome: </label>
 <input type="text" name="p.nome" value="${p.nome}" required> <br>
@@ -44,6 +44,9 @@
 			<option value="${f.id}" ${f.id == p.fornecedor?.id ? 'selected' : ''}>${f.nome}</option>
 	#{/list}
 </select> <br>
+<label>Foto do produto: </label>
+<input type="file" name="p.foto" />
+<br>
 <input type="submit" value="Salvar">
 </form>
 </div>

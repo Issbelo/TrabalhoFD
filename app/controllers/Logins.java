@@ -18,7 +18,7 @@ public class Logins extends Controller {
         } else {
             session.put("user", pessoa.login); 
             flash.success("Bem-vindo(a), " + pessoa.nome + "!");
-            Application.index(); 
+            Produtos.listar(null); 
         }
     }
 

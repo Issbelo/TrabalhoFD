@@ -7,6 +7,7 @@
 </header>
 </div>
 <div class="corpo">
+<img src="@{Produtos.verFoto(p.id)}" />
 <p>Nome: ${p.nome}</p>
 <p>Fornecedor: <a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></p>
 <p>Descrição: ${p.descricao}</p>

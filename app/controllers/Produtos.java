@@ -6,7 +6,10 @@ import models.Fornecedor;
 import models.Produto;
 import models.Status;
 import play.mvc.Controller;
+import play.mvc.With;
+import security.Seguranca;
 
+@With(Seguranca.class)
 public class Produtos extends Controller{
 
 	public static void listar(String texto) {
@@ -19,6 +22,12 @@ public class Produtos extends Controller{
 			List<Produto> lista = Produto.find("status != ?1 and (lower(nome) like ?2 or lower(categoria) like ?2 or lower(fornecedor.nome) like ?2)", Status.INDISPONIVEL, "%" + texto.toLowerCase() + "%").fetch();
 			render(lista, texto);
 		}
+	}
+	
+	public static void verFoto(Long id) {
+		Produto p = Produto.findById(id);
+		response.setContentTypeIfNotSet(p.foto.type());
+		renderBinary(p.foto.get());
 	}
 
 	public static void salvar(Produto p) {
