@@ -13,7 +13,7 @@
         </div>
     </div>
     <nav>
-		<a class="atual" href="@{Application.index()}">Início</a>
+		<a href="@{Application.index()}">Início</a>
         <a class="atual" href="#">Cadastrar novo produto</a>
         <a href="@{Fornecedores.form()}">Cadastrar novo fornecedor</a>
         <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
@@ -21,30 +21,37 @@
     </nav>
 </header>
 <div class="corpo">
+#{ifErrors}
+	<h4 class="error">Revise as informações do formulário</h4>
+#{/ifErrors}
 <form action=@{Produtos.salvar()} method="POST" enctype="multipart/form-data">
 <input type="hidden" name="p.id" value="${p.id}">
 <label>Nome: </label>
 <input type="text" name="p.nome" value="${p.nome}" required> <br>
+#{ifError 'p.nome'}<span class="error">#{error 'p.nome' /}</span><br /> #{/ifError}
 <label>Descrição:</label><br>
 <textarea name="p.descricao"  rows="4" cols="50" placeholder="Descreva o produto...">${p.descricao}</textarea> <br>
 <label>Preço: </label>
 <input type="number" step="0.01" name="p.preco" value="${p.preco}" required> <br>
+#{ifError 'p.preco'}<span class="error">#{error 'p.preco' /}</span><br />#{/ifError}
 <label>Quantidade: </label>
 <input type="number" step="1" name="p.quantidade" value="${p.quantidade}" required> <br>
+#{ifError 'p.quantidade'}<span class="error">#{error 'p.quantidade' /}</span><br />#{/ifError}
 <label>Categoria: </label>
 <select name="p.categoria" required>
 <option value="Moda" ${p.categoria == 'Moda' ? 'selected' : ''}>Moda</option>
 <option value="Tecnologia" ${p.categoria == 'Tecnologia' ? 'selected' : ''}>Tecnologia</option>
 <option value="Casa" ${p.categoria == 'Casa' ? 'selected' : ''}>Casa</option>
 <option value="Outros" ${p.categoria == 'Outros' ? 'selected' : ''}>Outros</option>
-</select>
-<br>
+</select><br>
+#{ifError 'p.categoria'}<span class="error">#{error 'p.categoria' /}</span><br />#{/ifError}
 <label>Fornecedor: </label>
 <select name="p.fornecedor.id">
 	#{list items:listaF, as:'f'}
 			<option value="${f.id}" ${f.id == p.fornecedor?.id ? 'selected' : ''}>${f.nome}</option>
 	#{/list}
 </select> <br>
+#{ifError 'p.fornecedor'}<span class="error">#{error 'p.fornecedor' /}</span><br />#{/ifError}
 <label>Foto do produto: </label>
 <input type="file" name="p.foto" />
 <br>

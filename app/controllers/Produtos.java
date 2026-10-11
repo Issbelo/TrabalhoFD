@@ -7,7 +7,10 @@ import models.Produto;
 import models.Status;
 import play.mvc.Controller;
 import play.mvc.With;
+import security.Administrator;
 import security.Seguranca;
+import play.data.validation.Valid;
+import play.data.validation.Validation;
 
 @With(Seguranca.class)
 public class Produtos extends Controller {
@@ -36,7 +39,12 @@ public class Produtos extends Controller {
 	
 	}
 
-	public static void salvar(Produto p) {
+	public static void salvar(@Valid Produto p) {
+		if (validation.hasErrors()) {
+			Produto erro = p;
+			List<Fornecedor> listaF = Fornecedor.find("status != ?1", Status.INDISPONIVEL).fetch();
+			renderTemplate("Produtos/form.html", erro, listaF);
+		}
 		p.save();
 		listar(null);
 	}
@@ -46,14 +54,16 @@ public class Produtos extends Controller {
 		List<Fornecedor> listaF = Fornecedor.find("status != ?1", Status.INDISPONIVEL).fetch();
 		render(p, listaF);
 	}
-
+	
+	@Administrator
 	public static void remover(Long id) {
 		Produto produto = Produto.findById(id);
 		produto.status = Status.INDISPONIVEL;
 		produto.save();
 		listar(null);
 	}
-
+	
+	@Administrator
 	public static void editar(Long id) {
 		Produto p = Produto.findById(id);
 		List<Fornecedor> listaF = Fornecedor.find("status != ?1", Status.INDISPONIVEL).fetch();

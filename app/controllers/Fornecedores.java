@@ -10,6 +10,7 @@ import play.data.validation.Validation;
 import play.db.jpa.JPABase;
 import play.mvc.Controller;
 import play.mvc.With;
+import security.Administrator;
 import security.Seguranca;
 
 @With(Seguranca.class)
@@ -34,11 +35,11 @@ public class Fornecedores extends Controller {
 		renderBinary(f.foto.get());
 	}
 
-	public static void salvar(Fornecedor f) {
-		// if (validation.hasErrors()) {
-		// Fornecedor erro = f;
-		// renderTemplate("Fornecedores/form.html", erro);
-		// }
+	public static void salvar(@Valid Fornecedor f) {
+		if (validation.hasErrors()) {
+		Fornecedor erro = f;
+		renderTemplate("Fornecedores/form.html", erro);
+		}
 		f.save();
 		listar(null);
 	}
@@ -48,17 +49,8 @@ public class Fornecedores extends Controller {
 		render(f);
 	}
 
+	@Administrator
 	public static void remover(Long id) {
-		// Obtém o utilizador atualmente autenticado na sessão
-	    String usuarioLogado = session.get("user");
-
-	    // Área restrita ao admin
-	    if (!Seguranca.isAdmin()) {
-            flash.error("Acesso negado: Apenas administradores podem realizar esta operação.");
-            listar(null);
-            return; // O 'return' garante que o código abaixo NÃO será executado
-        }
-
 	    Fornecedor fornecedor = Fornecedor.findById(id);
 	    if (fornecedor != null) {
 	        fornecedor.status = Status.INDISPONIVEL;
@@ -71,6 +63,7 @@ public class Fornecedores extends Controller {
 	    listar(null);
 	}
 
+	@Administrator
 	public static void editar(Long id) {
 		Fornecedor f = Fornecedor.findById(id);
 		renderTemplate("Fornecedores/form.html", f);

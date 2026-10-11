@@ -13,7 +13,7 @@
         </form>
     </div>
     <nav>
-		<a class="atual" href="@{Application.index()}">Início</a>
+		<a href="@{Application.index()}">Início</a>
         <a href="@{Produtos.form()}">Cadastrar novo produto</a>
         <a href="@{Fornecedores.form()}">Cadastrar novo fornecedor</a>
         <a class="atual" href="#">Lista de fornecedores</a>
@@ -26,19 +26,19 @@
 <tr>
 <th>Nome</th>
 <th>CNPJ</th>
-#{if session.user == 'admin'}
+#{if session['perfilUsuario'] == 'ADMIN'}
     <th>Remover</th>
-#{/if}
 <th>Editar</th>
+#{/if}
 </tr>
 #{list items:lista, as: 'f'}
 <tr>
 <td><a href=@{Fornecedores.detalhar(f.id, request.url)}>${f.nome}</a></td>
 <td>${f.cnpj}</td>
-#{if session.user == 'admin'}
+#{if session['perfilUsuario'] == 'ADMIN'}
 <td><a href=@{Fornecedores.remover(f.id)}>🗑️</a></td>
-#{/if}
 <td><a href=@{Fornecedores.editar(f.id)}>✏️</a></td>
+#{/if}
 </tr>
 #{/list}
 #{else}

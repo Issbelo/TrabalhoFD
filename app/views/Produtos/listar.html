@@ -12,7 +12,7 @@
         </form>
     </div>
     <nav>
-		<a class="atual" href="@{Application.index()}">Início</a>
+		<a href="@{Application.index()}">Início</a>
         <a href="@{Produtos.form()}">Cadastrar novo produto</a>
         <a href="@{Fornecedores.form()}">Cadastrar novo fornecedor</a>
         <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
@@ -40,8 +40,10 @@
 <td>${p.quantidade}</td>
 <td>${p.categoria}</td>
 <td><a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></td>
+#{if session['perfilUsuario'] == 'ADMIN'}
 <td><a href=@{Produtos.remover(p.id)}>🗑️</a></td>
 <td><a href=@{Produtos.editar(p.id)}>✏️</a></td>
+#{/if}
 </tr>
 #{/list}
 #{else}
@@ -49,3 +51,4 @@
 #{/else}
 </table>
 </div>
+<footer><a href="@{Logins.logout()}"> Deslogar</a></footer>

@@ -285,6 +285,10 @@ nav a:hover {
     background:#ffffff;
     font-family:Arial, Helvetica, sans-serif;
     color:#444444;
+    flex: 1;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .btn-voltar {
@@ -306,4 +310,14 @@ nav a:hover {
     color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(111,63,165,.3);
+}
+.error {
+	color: rgb(255, 0, 0);
+}
+footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #d9b3ff;
+    color: white;
 }

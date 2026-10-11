@@ -13,7 +13,7 @@
     </div>
 </div>
     <nav>
-		<a class="atual" href="@{Application.index()}">Início</a>
+		<a href="@{Application.index()}">Início</a>
         <a href="@{Produtos.form()}">Cadastrar novo produto</a>
         <a class="atual" href="#">Cadastrar novo fornecedor</a>
         <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
@@ -21,12 +21,17 @@
     </nav>
 </header>
 <div class="corpo">
+#{ifErrors}
+	<h4 class="error">Revise as informações do formulário</h4>
+#{/ifErrors}
 <form action=@{Fornecedores.salvar()} method="POST" enctype="multipart/form-data">
 <input type="hidden" name="f.id" value="${f.id}">
 <label>Nome: </label>
 <input type="text" name="f.nome" value="${f.nome}" required> <br>
+#{ifError 'f.nome'}<span class="error">#{error 'f.nome' /}</span><br />#{/ifError}
 <label>CNPJ: </label>
 <input type="text" name="f.cnpj" value="${f.cnpj}" required> <br>
+#{ifError 'f.cnpj'}<span class="error">#{error 'f.cnpj' /}</span><br />#{/ifError}
 <label>Foto da empresa: </label>
 <input type="file" name="f.foto" />
 
