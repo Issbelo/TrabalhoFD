@@ -11,16 +11,16 @@
 </header>
 <div class="corpo">
 #{if p.foto != null && p.foto.exists()}
-<img class="foto-detalhe" src="@{Produtos.verFoto(p.id)}" alt="Foto do produto ${p.nome}">
+<img class="imagem-arredondada" src="@{Produtos.verFoto(p.id)}" alt="Foto do produto ${p.nome}">
 #{/if}
 #{else}
-<img class="foto-detalhe" src="@{'/public/images/sem-foto.svg'}" alt="Produto sem foto cadastrada">
+<img class="imagem-arredondada" src="@{'/public/images/sem-foto.svg'}" alt="Produto sem foto cadastrada">
 #{/else}
 <p>Nome: ${p.nome}</p>
 <p>Fornecedor: <a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></p>
 <p>Descrição: ${p.descricao}</p>
-<p>Preço: <strong class="valor-moeda">${models.Formato.moeda(p.preco)}</strong></p>
-<p>Quantidade: <strong class="valor-numero">${models.Formato.quantidade(p.quantidade)}</strong></p>
+<p>Preço: ${p.preco}R$</p>
+<p>Quantidade: ${p.quantidade}</p>
 <p>Categoria: ${p.categoria}</p>
 
 
@@ -56,3 +56,4 @@
 <a href="${url}">← Voltar</a>
 </div>
 </div>
+<footer><a href="@{Logins.logout()}"> Deslogar</a></footer>

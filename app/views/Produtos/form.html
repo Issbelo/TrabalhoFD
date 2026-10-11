@@ -2,6 +2,7 @@
 <header>
     <div class="topo">
         <div class="logo">
+            <img class="logo-sistema" src="@{'/public/images/logo-pi.jpeg'}" alt="Logo Lyra Link">
 #{if p?.id}
 #{set title:'Editar produto' /}
 <h1>Editar produto</h1>
@@ -53,8 +54,9 @@
 </select> <br>
 #{ifError 'p.fornecedor'}<span class="error">#{error 'p.fornecedor' /}</span><br />#{/ifError}
 <label>Foto do produto: </label>
-<input type="file" name="p.foto" />
+<input type="file" name="p.foto" value="${p.foto}"/>
 <br>
 <input type="submit" value="Salvar">
 </form>
 </div>
+<footer><a href="@{Logins.logout()}"> Deslogar</a></footer>

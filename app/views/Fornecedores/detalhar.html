@@ -11,13 +11,13 @@
 </header>
 <div class="corpo">
 #{if f.foto != null && f.foto.exists()}
-<img class="foto-detalhe" src="@{Fornecedores.verFoto(f.id)}" alt="Foto do fornecedor ${f.nome}">
+<img class="imagem-arredondada" src="@{Fornecedores.verFoto(f.id)}" alt="Foto do fornecedor ${f.nome}">
 #{/if}
 #{else}
-<img class="foto-detalhe" src="@{'/public/images/sem-foto.svg'}" alt="Fornecedor sem foto cadastrada">
+<img class="imagem-arredondada" src="@{'/public/images/sem-foto.svg'}" alt="Fornecedor sem foto cadastrada">
 #{/else}
 <p>Nome: ${f.nome}</p>
-<p>CNPJ: <strong class="valor-cnpj">${models.Formato.cnpj(f.cnpj)}</strong></p>
+<p>CNPJ: ${f.cnpj}</p>
 
 <H2>Lista de produtos deste fornecedor</H2>
 <table>
@@ -34,8 +34,8 @@
 <tr>
 <td><a href="@{Produtos.detalhar(p.id, request.url)}">${p.nome}</a></td>
 <td>${p.descricao}</td>
-<td class="valor-moeda">${models.Formato.moeda(p.preco)}</td>
-<td class="valor-numero">${models.Formato.quantidade(p.quantidade)}</td>
+<td>${p.preco}R$</td>
+<td>${p.quantidade}</td>
 <td>${p.categoria}</td>
 <td><a href=@{Produtos.remover(p.id)}>🗑️</a></td>
 <td><a href=@{Produtos.editar(p.id)}>✏️</a></td>
@@ -49,3 +49,4 @@
 <a href="${url}">← Voltar</a>
 </div>
 </div>
+<footer><a href="@{Logins.logout()}"> Deslogar</a></footer>
