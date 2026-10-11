@@ -10,27 +10,30 @@ import play.mvc.With;
 import security.Seguranca;
 
 @With(Seguranca.class)
-public class Produtos extends Controller{
+public class Produtos extends Controller {
 
 	public static void listar(String texto) {
 
-		if (texto==null) {
-		List<Produto> lista = Produto.find("status != ?1", Status.INDISPONIVEL).fetch();
-		render(lista);
-		}
-		else {
-			List<Produto> lista = Produto.find("status != ?1 and (lower(nome) like ?2 or lower(categoria) like ?2 or lower(fornecedor.nome) like ?2)", Status.INDISPONIVEL, "%" + texto.toLowerCase() + "%").fetch();
+		if (texto == null || texto.trim().isEmpty()) {
+			List<Produto> lista = Produto.find("status != ?1", Status.INDISPONIVEL).fetch();
+			render(lista);
+		} else {
+			List<Produto> lista = Produto.find(
+					"status != ?1 and (lower(nome) like ?2 or lower(categoria) like ?2 or lower(fornecedor.nome) like ?2)",
+					Status.INDISPONIVEL, "%" + texto.toLowerCase() + "%").fetch();
 			render(lista, texto);
 		}
 	}
-	
+
 	public static void verFoto(Long id) {
 		Produto p = Produto.findById(id);
-		if (p == null || p.foto == null || !p.foto.exists()) {
-			notFound();
-		}
+        if (p != null && p.foto != null && p.foto.exists()) {
 		response.setContentTypeIfNotSet(p.foto.type());
 		renderBinary(p.foto.get());
+	} else {
+		notFound(); // Retorna erro 404 ou exibe uma imagem padrão
+	   }
+	
 	}
 
 	public static void salvar(Produto p) {
@@ -56,10 +59,16 @@ public class Produtos extends Controller{
 		List<Fornecedor> listaF = Fornecedor.find("status != ?1", Status.INDISPONIVEL).fetch();
 		renderTemplate("Produtos/form.html", p, listaF);
 	}
-	
-	public void detalhar(Long id, String url) {
+
+	public static void detalhar(Long id, String url) {
 		Produto p = Produto.findById(id);
-		List<Produto> produtos = Produto.find("categoria = ?1 and status != ?2 and id != ?3", p.categoria, Status.INDISPONIVEL, id).fetch();
-	    render(p, url, produtos);
+		if (p == null) {
+			flash.error("Produto não encontrado!");
+			listar(null);
+			return;
+		}
+		List<Produto> produtos = Produto
+				.find("categoria = ?1 and status != ?2 and id != ?3", p.categoria, Status.INDISPONIVEL, id).fetch();
+		render(p, url, produtos);
 	}
 }
