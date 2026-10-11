@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" role="img" aria-labelledby="titulo">
+  <title id="titulo">Foto não cadastrada</title>
+  <rect x="1" y="1" width="338" height="258" rx="18" fill="#141d33" stroke="#303c57" stroke-width="2"/>
+  <g fill="none" stroke="#a78bfa" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="112" y="62" width="116" height="92" rx="14"/>
+    <path d="M137 62l10-17h46l10 17"/>
+    <circle cx="170" cy="108" r="27"/>
+    <path d="M95 180h150" stroke="#55416f"/>
+  </g>
+  <text x="170" y="218" fill="#c2bdd2" font-family="Segoe UI, sans-serif" font-size="17" text-anchor="middle">Foto não cadastrada</text>
+</svg>

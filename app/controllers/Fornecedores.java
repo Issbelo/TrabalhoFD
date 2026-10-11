@@ -29,6 +29,9 @@ public class Fornecedores extends Controller{
 	
 	public static void verFoto(Long id) {
 		Fornecedor f = Fornecedor.findById(id);
+		if (f == null || f.foto == null || !f.foto.exists()) {
+			notFound();
+		}
 		response.setContentTypeIfNotSet(f.foto.type());
 		renderBinary(f.foto.get());
 	}
