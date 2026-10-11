@@ -12,5 +12,10 @@ public class Seguranca extends Controller {
 			Logins.form();
 		}
 	}
+	
+	// Método utilitário que pode ser chamado dentro dos controladores
+    public static boolean isAdmin() {
+        return "admin".equals(session.get("user"));
+    }
 
 }

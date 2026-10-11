@@ -10,15 +10,22 @@ public class Logins extends Controller {
     }
 
     public static void logar(String login, String senha) {
+        if (login == null || login.trim().isEmpty() || senha == null || senha.trim().isEmpty()) {
+        	flash.error("Preencha o login e a senha!");
+            form();
+            return;
+        }
+        
         Pessoa pessoa = Pessoa.autenticar(login, senha);
-
         if (pessoa == null) {
             flash.error("Login ou senha inválidos!");
-            form(); 
+            form();
+            
         } else {
+        	
             session.put("user", pessoa.login); 
             flash.success("Bem-vindo(a), " + pessoa.nome + "!");
-            Produtos.listar(null); 
+            Application.index();; 
         }
     }
 

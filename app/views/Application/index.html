@@ -1,8 +1,39 @@
 #{extends 'main.html' /}
-#{set title:'Página Inicial' /}
+#{set title:'Início - LyraLink' /}
 
-<h2> Bem-vindo!</h2>
+<header>
+    <div class="topo">
+        <div class="logo">
+            <h1>LyraLink</h1>
+        </div>
+        <form class="pesquisa" action="@{Produtos.listar()}">
+            <input type="text" name="texto" placeholder="Pesquisar..." value="${texto}">
+            <input type="submit" value="🔍">
+        </form>
+    </div>
+    <nav>
+        <a class="atual" href="@{Application.index()}">Início</a>
+        <a href="@{Produtos.form()}">Cadastrar novo produto</a>
+        <a href="@{Fornecedores.form()}">Cadastrar novo fornecedor</a>
+        <a href="@{Fornecedores.listar()}">Lista de fornecedores</a>
+        <a href="@{Produtos.listar()}">Lista de produtos</a>
+    </nav>
+</header>
+<br />
 
-<p>Você está logado como: <strong>${session.user}</strong></p>
-
-<a href="@{Logins.form()}">Sair</a>
+<div class="corpo">
+	<!-- Bloco Centralizado: Foto no Topo -> Boas-Vindas -> Descrição -->
+	<div style="text-align: center; margin-bottom: 35px;">
+	    <!-- 1. Foto da Logo em cima -->
+	    <img src="@{'/public/images/LyraLink.jpg'}" alt="LyraLink Logo" class="imagem-arredondada" style="width: 200px; height: 200px; object-fit: cover; margin-bottom: 15px;" />
+	    
+	    <!-- 2. Boas-Vindas -->
+	    <h2 style="margin: 0 0 10px 0;">Bem-vindo ao LyraLink</h2>
+	    
+	    <!-- 3. Parágrafo/Descrição embaixo -->
+	    <p style="max-width: 650px; margin: 0 auto; line-height: 1.6;">
+	        O <strong>LyraLink</strong> é a plataforma central para a gestão e controle do seu estoque. 
+	        Aqui você pode gerenciar seus produtos cadastrados, acompanhar quantidades e organizar os seus parceiros fornecedores em um só lugar.
+	    </p>
+    </div>
+</div>

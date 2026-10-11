@@ -7,9 +7,11 @@
 </header>
 </div>
 <div class="corpo">
-<img src="@{Fornecedores.verFoto(f.id)}" />
+<img src="@{Fornecedores.verFoto(f.id)}" class="imagem-arredondada" />
+<div class="ncp">
 <p>Nome: ${f.nome}</p>
 <p>CNPJ: ${f.cnpj}</p>
+</div>
 
 <H2>Lista de produtos deste fornecedor</H2>
 <table>
@@ -34,7 +36,7 @@
 </tr>
 #{/list}
 #{else}
-<td colspan="7">Nenhum produto cadastrado.</td>
+<td colspan="7">Este fornecedor ainda não possui produtos cadastrados.</td>
 #{/else}
 </table>
 <div class="btn-voltar">

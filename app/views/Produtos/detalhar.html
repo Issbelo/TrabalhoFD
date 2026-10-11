@@ -2,19 +2,40 @@
 #{set title:'Detalhamento de Produto' /}
 
 <header>
-<div class="topo">
-<h1>Detalhes do produto</h1>
+  <div class="topo">
+    <h1>Detalhes do produto</h1>
+  </div>
 </header>
-</div>
-<div class="corpo">
-<img src="@{Produtos.verFoto(p.id)}" />
-<p>Nome: ${p.nome}</p>
-<p>Fornecedor: <a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></p>
-<p>Descrição: ${p.descricao}</p>
-<p>Preço: ${p.preco}</p>
-<p>Preço: ${p.quantidade}</p>
-<p>Categoria: ${p.categoria}</p>
 
+<div class="corpo">
+#{if p?.foto?.exists()}
+<img src="@{Produtos.verFoto(p.id)}" class="imagem-arredondada" />
+#{/if}
+
+<H2>Descrição do Produto</H2>
+<table>
+
+<tr>
+<th>Nome</th>
+<th>Fornecedor</th>
+<th>Descrição</th>
+<th>Preço</th>
+<th>Quantidade</th>
+<th>Categoria</th>
+</tr>
+
+<tr>
+<td>${p.nome}</td>
+<td><a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></td>
+<td>${p.descricao}</td>
+<td>${p.preco}</td>
+<td>${p.quantidade}</td>
+<td>${p.categoria}</td>
+</tr>
+
+</table>
+
+<br />
 <H2>Lista de produtos similares</H2>
 <table>
 <tr>
