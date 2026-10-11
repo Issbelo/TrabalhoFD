@@ -30,7 +30,7 @@ public class Produtos extends Controller {
 
 	public static void verFoto(Long id) {
 		Produto p = Produto.findById(id);
-		if (p != null && p.foto != null && p.foto.exists()) {
+        if (p != null && p.foto != null && p.foto.exists()) {
 		response.setContentTypeIfNotSet(p.foto.type());
 		renderBinary(p.foto.get());
 	} else {

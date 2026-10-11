@@ -2,38 +2,28 @@
 #{set title:'Detalhamento de Produto' /}
 
 <header>
-  <div class="topo">
-    <h1>Detalhes do produto</h1>
-  </div>
+    <div class="topo">
+        <div class="logo">
+            <img class="logo-sistema" src="@{'/public/images/logo-pi.jpeg'}" alt="Logo Lyra Link">
+            <h1>Detalhes do produto</h1>
+        </div>
+    </div>
 </header>
-
 <div class="corpo">
-#{if p?.foto?.exists()}
-<img src="@{Produtos.verFoto(p.id)}" class="imagem-arredondada" />
+#{if p.foto != null && p.foto.exists()}
+<img class="foto-detalhe" src="@{Produtos.verFoto(p.id)}" alt="Foto do produto ${p.nome}">
 #{/if}
+#{else}
+<img class="foto-detalhe" src="@{'/public/images/sem-foto.svg'}" alt="Produto sem foto cadastrada">
+#{/else}
+<p>Nome: ${p.nome}</p>
+<p>Fornecedor: <a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></p>
+<p>Descrição: ${p.descricao}</p>
+<p>Preço: <strong class="valor-moeda">${models.Formato.moeda(p.preco)}</strong></p>
+<p>Quantidade: <strong class="valor-numero">${models.Formato.quantidade(p.quantidade)}</strong></p>
+<p>Categoria: ${p.categoria}</p>
 
-<H2>Descrição do Produto</H2>
-<table>
 
-<tr>
-<th>Nome</th>
-<th>Fornecedor</th>
-<th>Descrição</th>
-<th>Preço</th>
-<th>Quantidade</th>
-<th>Categoria</th>
-</tr>
-
-<tr>
-<td>${p.nome}</td>
-<td><a href="@{Fornecedores.detalhar(p.fornecedor.id, request.url)}">${p.fornecedor.nome}</a></td>
-<td>${p.descricao}</td>
-<td>${p.preco}</td>
-<td>${p.quantidade}</td>
-<td>${p.categoria}</td>
-</tr>
-
-</table>
 
 <br />
 <H2>Lista de produtos similares</H2>
@@ -51,8 +41,8 @@
 <tr>
 <td><a href="@{Produtos.detalhar(s.id, request.url)}">${s.nome}</a></td>
 <td>${s.descricao}</td>
-<td>${s.preco}</td>
-<td>${s.quantidade}</td>
+<td class="valor-moeda">${models.Formato.moeda(s.preco)}</td>
+<td class="valor-numero">${models.Formato.quantidade(s.quantidade)}</td>
 <td>${s.categoria}</td>
 <td><a href=@{Produtos.remover(s.id)}>🗑️</a></td>
 <td><a href=@{Produtos.editar(s.id)}>✏️</a></td>
