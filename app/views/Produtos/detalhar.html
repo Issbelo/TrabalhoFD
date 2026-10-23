@@ -41,8 +41,8 @@
 <tr>
 <td><a href="@{Produtos.detalhar(s.id, request.url)}">${s.nome}</a></td>
 <td>${s.descricao}</td>
-<td class="valor-moeda">${models.Formato.moeda(s.preco)}</td>
-<td class="valor-numero">${models.Formato.quantidade(s.quantidade)}</td>
+<td class="valor-moeda">${s.preco}</td>
+<td class="valor-numero">${s.quantidade}</td>
 <td>${s.categoria}</td>
 <td><a href=@{Produtos.remover(s.id)}>🗑️</a></td>
 <td><a href=@{Produtos.editar(s.id)}>✏️</a></td>
